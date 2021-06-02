@@ -1,0 +1,33 @@
+const countriesById = {
+'VE-A': "Distrito Capital",
+'VE-B': "Anzo\u00e1tegui",
+'VE-C': "Apure",
+'VE-Z': "Amazonas",
+'VE-D': "Aragua",
+'VE-E': "Barinas",
+'VE-F':"Bol\u00edvar",
+'VE-G':"Carabobo",
+'VE-H': "Cojedes",
+'VE-I':"Falc\u00f3n",
+'VE-J':"Gu\u00e1rico",
+'VE-K':"Lara",
+'VE-L':"M\u00e9rida",
+'VE-M':"Miranda",
+'VE-N':"Monagas",
+'VE-O':"Nueva Esparta",
+'VE-P':"Portuguesa",
+'VE-R':"Sucre",
+'VE-S':"T\u00e1chira",
+'VE-T':"Trujillo",
+'VE-U':"Yaracuy",
+'VE-V':"Zulia",
+'VE-W':"Los Roques",
+'VE-X':"La Guaira",
+'VE-Y': "Delta Amacuro",
+'AW': 'Aruba',
+'BQ': 'Bonaire, Saint Eustachius...',
+'CW': 'Curaçao',
+}
+
+
+export default countriesById;
