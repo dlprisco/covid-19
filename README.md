@@ -58,4 +58,4 @@ or
     npm run build
 
 ### Bug report
-&nbsp; You can send me any message to my email with a suggestion or in case of error, you would help me a lot.
+&nbsp; You can send me a message to my email with any suggestion or in case of error, you would help me a lot.
