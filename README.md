@@ -10,9 +10,7 @@
 ## COVID-19 VE
 
 &nbsp; Repository [covid-19](https://ve-covid19.web.app/), web application used to monitor and graph data about the situation of the covid-19 in this region (Venezuela) through the response of the official api of this, the data is processed in json format and rendered in the browser in a friendly and simple way, as for the graphical interface the program is based on UX / UI libraries such as [material-ui](https://github.com/mui-org/material-ui) and [material-kit](https://github.com/creativetimofficial/material-kit), if you are interested in more information about these visit the links.
-
 <br>
-
 ### Dependency structure
 &nbsp; The project contains the following dependencies.
 
@@ -59,3 +57,5 @@ or
 
     npm run build
 
+### Bug report
+&nbsp; You can send me any message to my email with a suggestion or in case of error, you would help me a lot.
