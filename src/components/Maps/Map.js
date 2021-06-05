@@ -77,7 +77,7 @@ export default function VEmap() {
 
 
    function fetchCountriesData() {
-    fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
+    fetch('').then(response => response.json())
       .then(json => {
       	setCountriesData(json.Confirmed.ByState);
         setLoadingCountriesData(false);
