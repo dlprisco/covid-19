@@ -306,7 +306,7 @@ export default function Dashboard() {
       </GridContainer>
     </div>
     <div >
-      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
+      <p>made by: <a href={"https://www.twitter.com/"} style={{color:'white'}}>@</a></p>
     </div>
     </>
   );
