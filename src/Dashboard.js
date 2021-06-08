@@ -6,7 +6,6 @@ import VEmap from './components/Maps/Map.js';
 // react plugin for creating charts
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
-import AccessTime from "@material-ui/icons/AccessTime";
 import GridItem from "./components/Grid/GridItem.js";
 import GridContainer from "./components/Grid/GridContainer.js";
 import CustomTabs from "./components/CustomTabs/CustomTabs.js";
@@ -16,6 +15,7 @@ import CardBody from "./components/Card/CardBody.js";
 import CardFooter from "./components/Card/CardFooter.js";
 import LineChartXY from "./components/Charts/LineChartXY";
 import Table from "./components/Table/Table.js";
+import AccessTime from "@material-ui/icons/AccessTime"
 
 import {
   successColor,
@@ -45,7 +45,7 @@ const styles = {
       marginRight: "3px",
       marginLeft: "3px",
     },
-    "& .fab,& .fas,& .far,& .fal,& .material-icons": {
+    "& .fab,& .fas,& .far,& .fal": {
       top: "4px",
       fontSize: "16px",
       position: "relative",
@@ -134,10 +134,8 @@ export default function Dashboard() {
   }, [loading, loadingTimeline]);
 
   function fetchJsonResponse() {
-    fetch('').then(response => response.json())
+    fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
-        console.log(json);
-        setConfirmedCases(json.Confirmed.Count);
         setRecoveredCases(json.Recovered.Count);
         setActiveCases(json.Active.Count);
         setDeathCases(json.Deaths.Count);
@@ -169,7 +167,6 @@ export default function Dashboard() {
             });
           }
         
-        console.log(data[0].date)
         setLoadingTimeline(false);
       }).catch(err=>{
         console.error(err);
@@ -306,7 +303,7 @@ export default function Dashboard() {
       </GridContainer>
     </div>
     <div >
-      <p>made by: <a href={"https://www.twitter.com/"} style={{color:'white'}}>@</a></p>
+      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
     </div>
     </>
   );
