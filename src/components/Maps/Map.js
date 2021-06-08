@@ -23,7 +23,6 @@ export default function VEmap() {
 			fetchCountriesData();
 		}
 
-
 		// Set map definition
 		x.geodataSource.url = 'https://www.amcharts.com/lib/4/geodata/json/venezuelaHigh.json';
   		x.geodataSource.events.on("parseended", function(ev) {
@@ -64,7 +63,7 @@ export default function VEmap() {
 
   function getCountryData(id) {
   	if (id === 'AW' || id === 'BQ' || id === 'CW') {
-  		return (Math.random() * 100)
+  		return (NaN)
   	}
 
   	return countries[countriesById[id]];
@@ -77,7 +76,7 @@ export default function VEmap() {
 
 
    function fetchCountriesData() {
-    fetch('').then(response => response.json())
+    fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
       	setCountriesData(json.Confirmed.ByState);
         setLoadingCountriesData(false);
