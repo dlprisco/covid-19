@@ -105,13 +105,8 @@ export default function Dashboard() {
 
   const chart = useRef(null);
 
-  const [deaths, setDeathCases] = useState(0);
-  const [recovered, setRecoveredCases] = useState(0);
-  const [active, setActiveCases] = useState(0);
-  const [confirmed, setConfirmedCases] = useState(0);
-
-  const [confirmedByState, setConfirmedByState] = useState({});
-  const [confirmedByAge, setConfirmedByAge] = useState({});
+  const [mappedResponse, setRespnseJSON] = useState({});
+  
   const [loading, setLoading] = useState(true);
   const [loadingTimeline, setLoadingTimeline] = useState(true);
 
@@ -136,11 +131,7 @@ export default function Dashboard() {
   function fetchJsonResponse() {
     fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
-        setRecoveredCases(json.Recovered.Count);
-        setActiveCases(json.Active.Count);
-        setDeathCases(json.Deaths.Count);
-        setConfirmedByState(json.Confirmed.ByState);
-        setConfirmedByAge(json.Confirmed.ByAgeRange);
+        setRespnseJSON(json);
         setLoading(false);
       })
       .catch(err => {
@@ -176,8 +167,8 @@ export default function Dashboard() {
   const classes = useStyles();
   
   // Create items array
-  var countries = Object.keys(confirmedByState).map(function(key) {
-  return [key, confirmedByState[key]];
+  var countries = Object.keys(mappedResponse.Confirmed.ByState).map(function(key) {
+  return [key, mappedResponse.Confirmed.ByState[key]];
   });
   
   // Sort the array based on the second element
@@ -185,8 +176,8 @@ export default function Dashboard() {
     return second[1] - first[1];
   });
 
-  var ageCases = Object.keys(confirmedByAge).map(function(key) {
-    return [key, confirmedByAge[key]]
+  var ageCases = Object.keys(mappedResponse.Confirmed.ByAgeRange).map(function(key) {
+    return [key, mappedResponse.Confirmed.ByAgeRange[key]]
   })
   
   return (
@@ -205,7 +196,7 @@ export default function Dashboard() {
                   <Card>
                   <CardHeader style={{backgroundColor:'lightred'}}>
                   <h2 >Count:</h2>
-                  <h3 style={{color:'red'}}>{deaths}</h3>
+                  <h3 style={{color:'red'}}>{mappedResponse.Deaths.Count}</h3>
                   </CardHeader>
                 </Card>
                   </>
@@ -218,7 +209,7 @@ export default function Dashboard() {
                   <Card>
                   <CardHeader>
                   <h2>Count:</h2>
-                  <h3 style={{color:'blue'}}>{confirmed}</h3>
+                  <h3 style={{color:'blue'}}>{mappedResponse.Confirmed.Count}</h3>
                   </CardHeader>
                   </Card>
                    <Table className='responsive'
@@ -235,11 +226,11 @@ export default function Dashboard() {
                     <Card>
                       <Card>                             
                         <h4 style={{color:"green"}}>Recovered: </h4>
-                        <h4>{recovered}</h4>
+                        <h4>{mappedResponse.Recovered.Count}</h4>
                       </Card>
                       <Card>                             
                         <h4 style={{color:"red"}}>Active: </h4>
-                        <h4>{active}</h4>
+                        <h4>{mappedResponse.json.Active.Count}</h4>
                       </Card>
                     </Card>
                   </>
@@ -303,7 +294,7 @@ export default function Dashboard() {
       </GridContainer>
     </div>
     <div >
-      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
+      <p>Made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
     </div>
     </>
   );
