@@ -131,6 +131,7 @@ export default function Dashboard() {
   function fetchJsonResponse() {
     fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
+        console.log(json);
         setRespnseJSON(json);
         setLoading(false);
       })
