@@ -128,8 +128,8 @@ export default function Dashboard() {
     };
   }, [loading, loadingTimeline]);
 
-  function fetchJsonResponse() {
-    fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
+  async function fetchJsonResponse() {
+    await fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
         console.log(json);
         setRespnseJSON(json);
@@ -166,20 +166,25 @@ export default function Dashboard() {
     }
 
   const classes = useStyles();
+  var countries = [];
+  var ageCases = [];
   
-  // Create items array
-  var countries = Object.keys(mappedResponse.Confirmed.ByState).map(function(key) {
-  return [key, mappedResponse.Confirmed.ByState[key]];
-  });
+  if (!loading) {
+    // Create items array
+    countries = Object.keys(mappedResponse.Confirmed.ByState).map(function(key) {
+      return [key, mappedResponse.Confirmed.ByState[key]];
+    });
   
-  // Sort the array based on the second element
-  countries.sort(function(first, second) {
-    return second[1] - first[1];
-  });
+    // Sort the array based on the second element
+    countries.sort(function(first, second) {
+      return second[1] - first[1];
+    });
 
-  var ageCases = Object.keys(mappedResponse.Confirmed.ByAgeRange).map(function(key) {
-    return [key, mappedResponse.Confirmed.ByAgeRange[key]]
-  })
+    ageCases = Object.keys(mappedResponse.Confirmed.ByAgeRange).map(function(key) {
+      return [key, mappedResponse.Confirmed.ByAgeRange[key]]
+    })
+  
+  } 
   
   return (
     <>
