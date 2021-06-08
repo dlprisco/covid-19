@@ -11,9 +11,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 // @material-ui/icons
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
 // core components
 import styles from "../../assets/jss/material-dashboard-react/components/tasksStyle.js";
 
@@ -46,8 +43,8 @@ export default function Tasks(props) {
                 checked={checked.indexOf(value) !== -1}
                 tabIndex={-1}
                 onClick={() => handleToggle(value)}
-                checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Check className={classes.uncheckedIcon} />}
+                checkedIcon={}
+                icon={}
                 classes={{
                   checked: classes.checked,
                   root: classes.root,
@@ -62,16 +59,6 @@ export default function Tasks(props) {
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
               >
-                <IconButton
-                  aria-label="Edit"
-                  className={classes.tableActionButton}
-                >
-                  <Edit
-                    className={
-                      classes.tableActionButtonIcon + " " + classes.edit
-                    }
-                  />
-                </IconButton>
               </Tooltip>
               <Tooltip
                 id="tooltip-top-start"
@@ -83,11 +70,6 @@ export default function Tasks(props) {
                   aria-label="Close"
                   className={classes.tableActionButton}
                 >
-                  <Close
-                    className={
-                      classes.tableActionButtonIcon + " " + classes.close
-                    }
-                  />
                 </IconButton>
               </Tooltip>
             </TableCell>

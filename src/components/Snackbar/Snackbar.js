@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snack from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
-import Close from "@material-ui/icons/Close";
 // core components
 import styles from "assets/jss/material-dashboard-react/components/snackbarContentStyle.js";
 
@@ -28,7 +27,6 @@ export default function Snackbar(props) {
         color="inherit"
         onClick={() => props.closeNotification()}
       >
-        <Close className={classes.close} />
       </IconButton>,
     ];
   }

@@ -131,7 +131,6 @@ export default function Dashboard() {
   function fetchJsonResponse() {
     fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
-        console.log(json);
         setRespnseJSON(json);
         setLoading(false);
       })
@@ -183,6 +182,125 @@ export default function Dashboard() {
   
   return (
     <>
+     {loading ? (
+      <div>
+      <GridContainer>
+      <GridItem >
+        <CustomTabs
+          title="Confirmed:"
+          headerColor="success"
+          tabs={[
+              {
+                tabName: "Deaths",
+                tabContent: (
+                  <>
+                  <Card>
+                  <CardHeader style={{backgroundColor:'lightred'}}>
+                  <h2 >Count:</h2>
+                  <h3 style={{color:'red'}}>{}</h3>
+                  </CardHeader>
+                </Card>
+                  </>
+                ),
+              },
+              {
+                tabName: "Cases",
+                tabContent: (
+                  <>
+                  <Card>
+                  <CardHeader>
+                  <h2>Count:</h2>
+                  <h3 style={{color:'blue'}}>{}</h3>
+                  </CardHeader>
+                  </Card>
+                   <Table className='responsive'
+                     tableHeaderColor="gray"
+                     tableHead={["Country","Cases"]}
+                     tableData={}/>
+                  </>
+                ),
+              },
+              {
+                tabName: "Total",
+                tabContent: (
+                  <>
+                    <Card>
+                      <Card>                             
+                        <h4 style={{color:"green"}}>Recovered: </h4>
+                        <h4>{}</h4>
+                      </Card>
+                      <Card>                             
+                        <h4 style={{color:"red"}}>Active: </h4>
+                        <h4>{}</h4>
+                      </Card>
+                    </Card>
+                  </>
+                ),
+              },
+            ]}
+          />
+        </GridItem>
+        <GridItem>
+          <Card>
+            <CardHeader style={{backgroundColor:'lightblue'}}>
+              <h1 className={classes.cardCategoryWhite}>Active cases </h1>
+              <p className={classes.cardCategoryWhite}>
+                Active cases by Age
+              </p>
+            </CardHeader>
+            <CardBody>
+              <Table
+                tableHeaderColor="warning"
+                tableHead={["Age", "Cases"]}
+                tableData={}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+          <Card>
+            <CardHeader> 
+             <Card>
+            <CardHeader style={{backgroundColor:'lightblue'}}>
+              <h4 className={classes.cardTitleWhite}>COVID-19 Statistics</h4>
+            </CardHeader>
+            </Card>
+             <LineChartXY />
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Timeline</h4>
+              <p className={classes.cardCategory}>Timeline data representation</p>
+            </CardBody>
+            <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> Last 24 hrs update...
+              </div>
+            </CardFooter>
+          </Card>
+      </GridContainer>
+      <GridContainer>
+          <Card>
+            <CardHeader> 
+             <Card>
+            <CardHeader style={{backgroundColor:'lightblue'}}>
+              <h4 className={classes.cardTitleWhite}>Country map</h4>
+            </CardHeader>
+            </Card>
+             <VEmap />
+            </CardHeader>
+            <CardBody>
+            </CardBody>
+          </Card>
+      </GridContainer>
+    </div>
+    <div >
+      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
+    </div>
+    </>) 
+
+   : (
+
     <div>
     <GridContainer>
       <GridItem >
@@ -295,8 +413,9 @@ export default function Dashboard() {
       </GridContainer>
     </div>
     <div >
-      <p>Made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
+      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
     </div>
     </>
+    )
   );
 }

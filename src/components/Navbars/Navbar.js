@@ -46,7 +46,6 @@ export default function Header(props) {
             aria-label="open drawer"
             onClick={props.handleDrawerToggle}
           >
-            <Menu />
           </IconButton>
         </Hidden>
       </Toolbar>
