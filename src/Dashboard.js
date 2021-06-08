@@ -6,6 +6,7 @@ import VEmap from './components/Maps/Map.js';
 // react plugin for creating charts
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
+import AccessTime from "@material-ui/icons/AccessTime";
 import GridItem from "./components/Grid/GridItem.js";
 import GridContainer from "./components/Grid/GridContainer.js";
 import CustomTabs from "./components/CustomTabs/CustomTabs.js";
@@ -15,7 +16,6 @@ import CardBody from "./components/Card/CardBody.js";
 import CardFooter from "./components/Card/CardFooter.js";
 import LineChartXY from "./components/Charts/LineChartXY";
 import Table from "./components/Table/Table.js";
-import AccessTime from "@material-ui/icons/AccessTime"
 
 import {
   successColor,
@@ -45,7 +45,7 @@ const styles = {
       marginRight: "3px",
       marginLeft: "3px",
     },
-    "& .fab,& .fas,& .far,& .fal": {
+    "& .fab,& .fas,& .far,& .fal,& .material-icons": {
       top: "4px",
       fontSize: "16px",
       position: "relative",
@@ -105,8 +105,13 @@ export default function Dashboard() {
 
   const chart = useRef(null);
 
-  const [mappedResponse, setRespnseJSON] = useState({});
-  
+  const [deaths, setDeathCases] = useState(0);
+  const [recovered, setRecoveredCases] = useState(0);
+  const [active, setActiveCases] = useState(0);
+  const [confirmed, setConfirmedCases] = useState(0);
+
+  const [confirmedByState, setConfirmedByState] = useState({});
+  const [confirmedByAge, setConfirmedByAge] = useState({});
   const [loading, setLoading] = useState(true);
   const [loadingTimeline, setLoadingTimeline] = useState(true);
 
@@ -128,10 +133,16 @@ export default function Dashboard() {
     };
   }, [loading, loadingTimeline]);
 
-  async function fetchJsonResponse() {
-    await fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
+  function fetchJsonResponse() {
+    fetch('https://covid19.patria.org.ve/api/v1/summary').then(response => response.json())
       .then(json => {
-        setRespnseJSON(json);
+        console.log(json);
+        setConfirmedCases(json.Confirmed.Count);
+        setRecoveredCases(json.Recovered.Count);
+        setActiveCases(json.Active.Count);
+        setDeathCases(json.Deaths.Count);
+        setConfirmedByState(json.Confirmed.ByState);
+        setConfirmedByAge(json.Confirmed.ByAgeRange);
         setLoading(false);
       })
       .catch(err => {
@@ -158,6 +169,7 @@ export default function Dashboard() {
             });
           }
         
+        console.log(data[0].date)
         setLoadingTimeline(false);
       }).catch(err=>{
         console.error(err);
@@ -165,147 +177,23 @@ export default function Dashboard() {
     }
 
   const classes = useStyles();
-  var countries = [];
-  var ageCases = [];
   
-  if (!loading) {
-    // Create items array
-    countries = Object.keys(mappedResponse.Confirmed.ByState).map(function(key) {
-      return [key, mappedResponse.Confirmed.ByState[key]];
-    });
+  // Create items array
+  var countries = Object.keys(confirmedByState).map(function(key) {
+  return [key, confirmedByState[key]];
+  });
   
-    // Sort the array based on the second element
-    countries.sort(function(first, second) {
-      return second[1] - first[1];
-    });
+  // Sort the array based on the second element
+  countries.sort(function(first, second) {
+    return second[1] - first[1];
+  });
 
-    ageCases = Object.keys(mappedResponse.Confirmed.ByAgeRange).map(function(key) {
-      return [key, mappedResponse.Confirmed.ByAgeRange[key]]
-    })
-  
-  } 
+  var ageCases = Object.keys(confirmedByAge).map(function(key) {
+    return [key, confirmedByAge[key]]
+  })
   
   return (
     <>
-     {loading ? (
-      <div>
-      <GridContainer>
-      <GridItem >
-        <CustomTabs
-          title="Confirmed:"
-          headerColor="success"
-          tabs={[
-              {
-                tabName: "Deaths",
-                tabContent: (
-                  <>
-                  <Card>
-                  <CardHeader style={{backgroundColor:'lightred'}}>
-                  <h2 >Count:</h2>
-                  <h3 style={{color:'red'}}>{}</h3>
-                  </CardHeader>
-                </Card>
-                  </>
-                ),
-              },
-              {
-                tabName: "Cases",
-                tabContent: (
-                  <>
-                  <Card>
-                  <CardHeader>
-                  <h2>Count:</h2>
-                  <h3 style={{color:'blue'}}>{}</h3>
-                  </CardHeader>
-                  </Card>
-                   <Table className='responsive'
-                     tableHeaderColor="gray"
-                     tableHead={["Country","Cases"]}
-                     tableData={}/>
-                  </>
-                ),
-              },
-              {
-                tabName: "Total",
-                tabContent: (
-                  <>
-                    <Card>
-                      <Card>                             
-                        <h4 style={{color:"green"}}>Recovered: </h4>
-                        <h4>{}</h4>
-                      </Card>
-                      <Card>                             
-                        <h4 style={{color:"red"}}>Active: </h4>
-                        <h4>{}</h4>
-                      </Card>
-                    </Card>
-                  </>
-                ),
-              },
-            ]}
-          />
-        </GridItem>
-        <GridItem>
-          <Card>
-            <CardHeader style={{backgroundColor:'lightblue'}}>
-              <h1 className={classes.cardCategoryWhite}>Active cases </h1>
-              <p className={classes.cardCategoryWhite}>
-                Active cases by Age
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["Age", "Cases"]}
-                tableData={}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-          <Card>
-            <CardHeader> 
-             <Card>
-            <CardHeader style={{backgroundColor:'lightblue'}}>
-              <h4 className={classes.cardTitleWhite}>COVID-19 Statistics</h4>
-            </CardHeader>
-            </Card>
-             <LineChartXY />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Timeline</h4>
-              <p className={classes.cardCategory}>Timeline data representation</p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> Last 24 hrs update...
-              </div>
-            </CardFooter>
-          </Card>
-      </GridContainer>
-      <GridContainer>
-          <Card>
-            <CardHeader> 
-             <Card>
-            <CardHeader style={{backgroundColor:'lightblue'}}>
-              <h4 className={classes.cardTitleWhite}>Country map</h4>
-            </CardHeader>
-            </Card>
-             <VEmap />
-            </CardHeader>
-            <CardBody>
-            </CardBody>
-          </Card>
-      </GridContainer>
-    </div>
-    <div >
-      <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
-    </div>
-    </>) 
-
-   : (
-
     <div>
     <GridContainer>
       <GridItem >
@@ -320,7 +208,7 @@ export default function Dashboard() {
                   <Card>
                   <CardHeader style={{backgroundColor:'lightred'}}>
                   <h2 >Count:</h2>
-                  <h3 style={{color:'red'}}>{mappedResponse.Deaths.Count}</h3>
+                  <h3 style={{color:'red'}}>{deaths}</h3>
                   </CardHeader>
                 </Card>
                   </>
@@ -333,7 +221,7 @@ export default function Dashboard() {
                   <Card>
                   <CardHeader>
                   <h2>Count:</h2>
-                  <h3 style={{color:'blue'}}>{mappedResponse.Confirmed.Count}</h3>
+                  <h3 style={{color:'blue'}}>{confirmed}</h3>
                   </CardHeader>
                   </Card>
                    <Table className='responsive'
@@ -350,11 +238,11 @@ export default function Dashboard() {
                     <Card>
                       <Card>                             
                         <h4 style={{color:"green"}}>Recovered: </h4>
-                        <h4>{mappedResponse.Recovered.Count}</h4>
+                        <h4>{recovered}</h4>
                       </Card>
                       <Card>                             
                         <h4 style={{color:"red"}}>Active: </h4>
-                        <h4>{mappedResponse.json.Active.Count}</h4>
+                        <h4>{active}</h4>
                       </Card>
                     </Card>
                   </>
@@ -421,6 +309,5 @@ export default function Dashboard() {
       <p>made by: <a href={"https://www.twitter.com/blaessster"} style={{color:'white'}}>@blaessster</a></p>
     </div>
     </>
-    )
   );
 }
