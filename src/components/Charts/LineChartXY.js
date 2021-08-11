@@ -25,7 +25,7 @@ export default function LineChartXY() {
 	let dateAxis2 = x.xAxes.push(new am4charts.DateAxis());
 	let dateAxis3 = x.xAxes.push(new am4charts.DateAxis());
 
-dateAxis.renderer.minGridDistance = 35; dateAxis2.renderer.minGridDistance = 35; dateAxis3.renderer.minGridDistance = 35;
+dateAxis.renderer.minGridDistance = 4; dateAxis2.renderer.minGridDistance = 4; dateAxis3.renderer.minGridDistance = 4;
 
 	let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
 	let valueAxis3 = x.yAxes.push(new am4charts.ValueAxis());
