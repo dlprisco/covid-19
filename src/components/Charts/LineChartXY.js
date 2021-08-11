@@ -21,9 +21,9 @@ export default function LineChartXY() {
     x.paddingRight = 5;
 
     x.data = timelineData;
-	let dateAxis = x.xAxes.push(new am4charts.DateAxis());
-	let dateAxis2 = x.xAxes.push(new am4charts.DateAxis());
-	let dateAxis3 = x.xAxes.push(new am4charts.DateAxis());
+	let dateAxis = am4charts.DateAxis();
+	let dateAxis2 = am4charts.DateAxis();
+	let dateAxis3 = am4charts.DateAxis();
 
 dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30; dateAxis3.renderer.minGridDistance = 30;
 
@@ -111,35 +111,20 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	var d2 = parseInt(json[i].Date.slice(8, 10));
 
         	confirmed = json[i].Confirmed.New;
+	        recovered = json[i].Recovered.New;
+        	deaths = json[i].Deaths.New;
 
         	data.push({ 
-             date: new Date(d, d2, d1),
+             date: new Date(d, d1, d2),
              name: 'confirmed',
              confirmed: confirmed,  
-            });
-          }
 
-        for (let i = 0; i < json.length; i++) {
-          var d0 = parseInt(json[i].Date.slice(0, 4));
-          var d01 = parseInt(json[i].Date.slice(5, 7));
-          var d02 = parseInt(json[i].Date.slice(8, 10));
-
-          recovered = json[i].Recovered.New;
-
-           data.push({ 
-             date2: new Date(d0, d02, d01),
              name: 'recovered',
              recovered: recovered,  
-            });
-          }
 
-        for (let i = 0; i < json.length; i++) {
-        	deaths = json[i].Deaths.New;
-           data.push({ 
-             date3: new Date(json[i].Date.slice(0, 4), json[i].Date.slice(8, 10), json[i].Date.slice(5, 7)),
-             name: 'deaths',
+	     name: 'deaths',
              deaths: deaths,  
-            });
+	     });
           }
         setTimelineData(data);
         setLoadingTimeline(false);
