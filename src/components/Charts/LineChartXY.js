@@ -21,13 +21,11 @@ export default function LineChartXY() {
     x.paddingRight = 5;
 
     x.data = timelineData;
-	  /*
-	let dateAxis = new am4charts.DateAxis();
-	let dateAxis2 = new am4charts.DateAxis();
-	let dateAxis3 = new am4charts.DateAxis();
+	let dateAxis = x.xAxes.push(new am4charts.DateAxis());
+	let dateAxis2 = x.xAxes.push(new am4charts.DateAxis());
+	let dateAxis3 = x.xAxes.push(new am4charts.DateAxis());
 
 dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30; dateAxis3.renderer.minGridDistance = 30;
-*/
 	let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
 	let valueAxis3 = x.yAxes.push(new am4charts.ValueAxis());
   let valueAxis2 = x.yAxes.push(new am4charts.ValueAxis());
@@ -72,7 +70,7 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
 
 	// Add cursor
 	  x.cursor = new am4charts.XYCursor();
-          //x.cursor.xAxis = dateAxis;
+          x.cursor.xAxis = dateAxis;
 
 	  x.cursor.snapToSeries = [series, series2, series3];
   	
@@ -82,11 +80,9 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
  	
   	valueAxis.renderer.grid.template.strokeOpacity = 0.07;
   	valueAxis2.renderer.grid.template.strokeOpacity = 0.07;
-/*
 	  dateAxis.renderer.grid.template.strokeOpacity = 0.07;
   	dateAxis2.renderer.grid.template.strokeOpacity = 0.07;
   	dateAxis3.renderer.grid.template.strokeOpacity = 0.07;
-  */	
   	valueAxis3.renderer.grid.template.strokeOpacity = 0.07;
 
  	chart.current = x;
