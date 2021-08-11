@@ -71,7 +71,7 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
 
 	// Add cursor
 	  x.cursor = new am4charts.XYCursor();
-          //x.cursor.xAxis = dateAxis;
+          x.cursor.xAxis = dateAxis;
 
 	  x.cursor.snapToSeries = [series, series2, series3];
   	
