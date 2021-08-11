@@ -129,7 +129,7 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	deaths = json[i].Deaths.New;
 
         	data.push({ 
-        	     date: new Date(d, d1, d2),
+        	     date2: new Date(d, d1, d2),
         	     name: 'recovered',
 	             recovered: recovered  
           });
@@ -142,7 +142,7 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	deaths = json[i].Deaths.New;
 
         	data.push({ 
-           	     date: new Date(d, d1, d2),
+           	     date3: new Date(d, d1, d2),
 	 	     name: 'deaths',
              	     deaths: deaths
 		});
