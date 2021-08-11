@@ -21,9 +21,9 @@ export default function LineChartXY() {
     x.paddingRight = 5;
 
     x.data = timelineData;
-	let dateAxis = am4charts.DateAxis();
-	let dateAxis2 = am4charts.DateAxis();
-	let dateAxis3 = am4charts.DateAxis();
+	let dateAxis = new am4charts.DateAxis();
+	let dateAxis2 = new am4charts.DateAxis();
+	let dateAxis3 = new am4charts.DateAxis();
 
 dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30; dateAxis3.renderer.minGridDistance = 30;
 
