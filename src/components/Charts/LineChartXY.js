@@ -114,7 +114,7 @@ dateAxis.renderer.minGridDistance = 35; dateAxis2.renderer.minGridDistance = 35;
 
         	data.push({ 
              date: new Date(d, d2, d1),
-             name: 'Confirmed',
+             name: 'confirmed',
              confirmed: confirmed,  
             });
           }
@@ -128,7 +128,7 @@ dateAxis.renderer.minGridDistance = 35; dateAxis2.renderer.minGridDistance = 35;
 
            data.push({ 
              date2: new Date(d0, d02, d01),
-             name: 'Recovered',
+             name: 'recovered',
              recovered: recovered,  
             });
           }
@@ -137,7 +137,7 @@ dateAxis.renderer.minGridDistance = 35; dateAxis2.renderer.minGridDistance = 35;
         	deaths = json[i].Deaths.New;
            data.push({ 
              date3: new Date(json[i].Date.slice(0, 4), json[i].Date.slice(8, 10), json[i].Date.slice(5, 7)),
-             name: 'Deaths',
+             name: 'deaths',
              deaths: deaths,  
             });
           }
