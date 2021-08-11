@@ -25,7 +25,7 @@ export default function LineChartXY() {
 	let dateAxis2 = x.xAxes.push(new am4charts.DateAxis());
 	let dateAxis3 = x.xAxes.push(new am4charts.DateAxis());
 
-dateAxis.renderer.minGridDistance = 4; dateAxis2.renderer.minGridDistance = 4; dateAxis3.renderer.minGridDistance = 4;
+dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30; dateAxis3.renderer.minGridDistance = 30;
 
 	let valueAxis = x.yAxes.push(new am4charts.ValueAxis());
 	let valueAxis3 = x.yAxes.push(new am4charts.ValueAxis());
@@ -113,7 +113,7 @@ dateAxis.renderer.minGridDistance = 4; dateAxis2.renderer.minGridDistance = 4; d
         	confirmed = json[i].Confirmed.New;
 
         	data.push({ 
-             date: new Date(d, d1, d2),
+             date: new Date(d, d2, d1),
              name: 'confirmed',
              confirmed: confirmed,  
             });
@@ -127,7 +127,7 @@ dateAxis.renderer.minGridDistance = 4; dateAxis2.renderer.minGridDistance = 4; d
           recovered = json[i].Recovered.New;
 
            data.push({ 
-             date2: new Date(d0, d01, d02),
+             date2: new Date(d0, d02, d01),
              name: 'recovered',
              recovered: recovered,  
             });
@@ -136,7 +136,7 @@ dateAxis.renderer.minGridDistance = 4; dateAxis2.renderer.minGridDistance = 4; d
         for (let i = 0; i < json.length; i++) {
         	deaths = json[i].Deaths.New;
            data.push({ 
-             date3: new Date(json[i].Date.slice(0, 4), json[i].Date.slice(5, 7), json[i].Date.slice(8, 10)),
+             date3: new Date(json[i].Date.slice(0, 4), json[i].Date.slice(8, 10), json[i].Date.slice(5, 7)),
              name: 'deaths',
              deaths: deaths,  
             });
