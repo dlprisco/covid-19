@@ -117,16 +117,22 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	deaths = json[i].Deaths.New;
 
         	data.push({ 
-             date: new Date(d, d1, d2),
-             name: 'confirmed',
-             confirmed: confirmed,  
+        	     date: new Date(d, d1, d2),
+	             name: 'confirmed',
+	             confirmed: confirmed
+		});
 
-             name: 'recovered',
-             recovered: recovered,  
-
-	     name: 'deaths',
-             deaths: deaths,  
-	     });
+		data.push({ 
+        	     date: new Date(d, d1, d2),
+        	     name: 'recovered',
+	             recovered: recovered  
+		});
+		
+ 		data.push({ 
+           	     date: new Date(d, d1, d2),
+	 	     name: 'deaths',
+             	     deaths: deaths
+		});
           }
         setTimelineData(data);
         setLoadingTimeline(false);
