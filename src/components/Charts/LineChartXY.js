@@ -116,13 +116,32 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	     date: new Date(d, d1, d2),
 	             name: 'confirmed',
 	             confirmed: confirmed
-		},
-			 { 
+		});
+          }
+	      
+        for (let i = 0; i < json.length; i++) {
+        	var d = parseInt(json[i].Date.slice(0, 4));
+        	var d1 = parseInt(json[i].Date.slice(5, 7));
+        	var d2 = parseInt(json[i].Date.slice(8, 10));
+
+        	confirmed = json[i].Confirmed.New;
+	        recovered = json[i].Recovered.New;
+        	deaths = json[i].Deaths.New;
+
+        	data.push({ 
         	     date: new Date(d, d1, d2),
         	     name: 'recovered',
 	             recovered: recovered  
-		},
-	      { 
+          });
+	}
+	              for (let i = 0; i < json.length; i++) {
+        	var d = parseInt(json[i].Date.slice(0, 4));
+        	var d1 = parseInt(json[i].Date.slice(5, 7));
+        	var d2 = parseInt(json[i].Date.slice(8, 10));
+
+        	deaths = json[i].Deaths.New;
+
+        	data.push({ 
            	     date: new Date(d, d1, d2),
 	 	     name: 'deaths',
              	     deaths: deaths
