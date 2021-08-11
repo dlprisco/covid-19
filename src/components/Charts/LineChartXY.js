@@ -116,15 +116,13 @@ dateAxis.renderer.minGridDistance = 30; dateAxis2.renderer.minGridDistance = 30;
         	     date: new Date(d, d1, d2),
 	             name: 'confirmed',
 	             confirmed: confirmed
-		});
-
-		data.push({ 
+		},
+			 { 
         	     date: new Date(d, d1, d2),
         	     name: 'recovered',
 	             recovered: recovered  
-		});
-		
- 		data.push({ 
+		},
+	      { 
            	     date: new Date(d, d1, d2),
 	 	     name: 'deaths',
              	     deaths: deaths
